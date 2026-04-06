@@ -7,10 +7,13 @@ using System.Text.Json;
 using System.Threading.Channels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
 using FinanceTracker.Web.Models;
 using FinanceTracker.Web.Models.ViewModels;
 using FinanceTracker.Web.Services;
 using FinanceTracker.Web.Services.Interfaces;
+using FinanceTracker.Web.SwaggerExamples;
 
 [Authorize]
 public class ExpenseController : Controller
@@ -76,37 +79,66 @@ public class ExpenseController : Controller
         };
     }
 
+    /// <summary>Renders the Expenses management page.</summary>
+    /// <returns>HTML view with the expense form and current month listing.</returns>
     public async Task<IActionResult> Index()
     {
         return View(await BuildViewModelAsync());
     }
 
-    /// <summary>AJAX endpoint — returns filtered, paginated expenses as JSON.</summary>
+    /// <summary>Returns a filtered, paginated list of expenses as JSON.</summary>
+    /// <remarks>
+    /// AJAX endpoint. All filter parameters are optional:
+    /// - Omitting <c>dateFrom</c>/<c>dateTo</c> defaults to the current calendar month.
+    /// - Omitting <c>category</c> returns expenses across all categories.
+    /// - Omitting <c>tags</c> returns expenses with any (or no) tags.
+    /// </remarks>
+    /// <param name="filter">Filter and pagination options.</param>
+    /// <returns>Paginated expense result with category totals and grand total amount.</returns>
     [HttpGet]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "List expenses (AJAX)", Tags = new[] { "Expenses" })]
+    [SwaggerResponse(200, "Paginated expense list", typeof(PagedResult<Expense>))]
+    [SwaggerResponseExample(200, typeof(PagedExpenseResultExample))]
     public async Task<IActionResult> List([FromQuery] ExpenseFilter filter)
     {
         var result = await _expenseQueryService.GetFilteredAsync(GetUserId(), filter);
         return Json(result, _jsonOptions);
     }
 
-    /// <summary>AJAX — returns current category list as JSON (refreshed without page reload).</summary>
+    /// <summary>Returns the current category list for the authenticated user as JSON.</summary>
+    /// <remarks>AJAX endpoint — refreshes without a page reload after async CSV imports complete.</remarks>
+    /// <returns>Array of category name strings.</returns>
     [HttpGet]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "List expense categories (AJAX)", Tags = new[] { "Expenses" })]
+    [SwaggerResponse(200, "Array of category names", typeof(string[]))]
     public async Task<IActionResult> Categories()
     {
         var categories = await _categoryService.GetCategoriesAsync(GetUserId());
         return Json(categories);
     }
 
-    /// <summary>AJAX autocomplete for categories.</summary>
+    /// <summary>Returns category suggestions matching the given prefix for autocomplete.</summary>
+    /// <param name="q">Search prefix (empty returns all categories).</param>
+    /// <returns>Array of matching category name strings.</returns>
     [HttpGet]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Category autocomplete suggestions (AJAX)", Tags = new[] { "Expenses" })]
+    [SwaggerResponse(200, "Matching category names", typeof(string[]))]
     public async Task<IActionResult> CategorySuggestions(string q = "")
     {
         var categories = await _categoryService.SearchCategoriesAsync(GetUserId(), q);
         return Json(categories);
     }
 
-    /// <summary>AJAX autocomplete for tags.</summary>
+    /// <summary>Returns tag suggestions matching the given prefix for autocomplete.</summary>
+    /// <param name="q">Search prefix (empty returns all tags).</param>
+    /// <returns>Array of matching tag strings.</returns>
     [HttpGet]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Tag autocomplete suggestions (AJAX)", Tags = new[] { "Expenses" })]
+    [SwaggerResponse(200, "Matching tag strings", typeof(string[]))]
     public async Task<IActionResult> TagSuggestions(string q = "")
     {
         var tags = await _tagService.SearchTagsAsync(GetUserId(), q);

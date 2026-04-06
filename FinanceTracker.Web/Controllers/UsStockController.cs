@@ -36,12 +36,17 @@ public class UsStockController : Controller
         };
     }
 
+    /// <summary>Renders the US Stocks portfolio management page.</summary>
     public async Task<IActionResult> Index()
     {
         var portfolio = await _portfolioRepository.GetPortfolioAsync(GetUserId());
         return View(await BuildViewModelAsync(portfolio));
     }
 
+    /// <summary>
+    /// Adds a new US stock holding, fetching the current USD price and USD/INR exchange rate automatically.
+    /// </summary>
+    /// <remarks>The <c>companyName</c> field is optional; the symbol is used as a fallback.</remarks>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Add(UsStockViewModel model)
@@ -85,6 +90,8 @@ public class UsStockController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>Deletes a US stock holding by its ID.</summary>
+    /// <param name="id">The unique identifier of the holding to delete.</param>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(string id)
@@ -97,6 +104,7 @@ public class UsStockController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>Clears all US stock holdings from the portfolio.</summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteAll()
@@ -108,6 +116,7 @@ public class UsStockController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>Refreshes live USD prices and USD/INR exchange rate for all US stock holdings.</summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> RefreshPrices()

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\workshop\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj": {}
+    "D:\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj": {}
   },
   "projects": {
-    "D:\\workshop\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj": {
+    "D:\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\workshop\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj",
+        "projectUniqueName": "D:\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj",
         "projectName": "FinanceTracker.Tests",
-        "projectPath": "D:\\workshop\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj",
+        "projectPath": "D:\\FinanceTracker\\FinanceTracker.Tests\\FinanceTracker.Tests.csproj",
         "packagesPath": "C:\\Users\\ajyadav\\.nuget\\packages\\",
-        "outputPath": "D:\\workshop\\FinanceTracker\\FinanceTracker.Tests\\obj\\",
+        "outputPath": "D:\\FinanceTracker\\FinanceTracker.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj": {
-                "projectPath": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj"
+              "D:\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj": {
+                "projectPath": "D:\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj"
               }
             }
           }
@@ -103,14 +103,14 @@
         }
       }
     },
-    "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj": {
+    "D:\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj",
+        "projectUniqueName": "D:\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj",
         "projectName": "FinanceTracker.Web",
-        "projectPath": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj",
+        "projectPath": "D:\\FinanceTracker\\FinanceTracker.Web\\FinanceTracker.Web.csproj",
         "packagesPath": "C:\\Users\\ajyadav\\.nuget\\packages\\",
-        "outputPath": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\obj\\",
+        "outputPath": "D:\\FinanceTracker\\FinanceTracker.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -178,6 +178,18 @@
             "Serilog.Sinks.File": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.9.0, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.9.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [

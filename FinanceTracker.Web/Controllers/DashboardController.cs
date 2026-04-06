@@ -23,6 +23,13 @@ public class DashboardController : Controller
 
     private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
+    /// <summary>
+    /// Renders the portfolio dashboard with total invested value, current value, profit/loss,
+    /// asset allocation breakdown, and monthly portfolio growth chart.
+    /// </summary>
+    /// <remarks>
+    /// Automatically captures a monthly snapshot on the first visit of each calendar month.
+    /// </remarks>
     public async Task<IActionResult> Index()
     {
         var portfolio = await _portfolioRepository.GetPortfolioAsync(GetUserId());
@@ -81,6 +88,10 @@ public class DashboardController : Controller
         return View(viewModel);
     }
 
+    /// <summary>
+    /// Refreshes live market prices for all equity, mutual fund, and US stock holdings
+    /// by fetching current quotes from external market data services.
+    /// </summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> RefreshPrices()

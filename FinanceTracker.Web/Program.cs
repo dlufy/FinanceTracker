@@ -1,4 +1,7 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using FinanceTracker.Web.Database;
 using FinanceTracker.Web.Services;
 using FinanceTracker.Web.Services.Interfaces;
@@ -29,6 +32,61 @@ try
     // Add services to the container.
     builder.Services.AddControllersWithViews();
     builder.Services.AddMemoryCache();
+
+    // ── Swagger / OpenAPI ──────────────────────────────────────────────────
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Title = "FinanceTracker API",
+            Version = "v1",
+            Description = """
+                REST-style JSON endpoints exposed by the FinanceTracker web application.
+                Most pages are server-rendered MVC views; the endpoints documented here
+                are the AJAX / JSON endpoints used by the frontend and available for
+                programmatic access.
+
+                **Authentication:** Cookie-based (login at `/Account/Login`).
+                All endpoints require an active session cookie.
+                """,
+            Contact = new OpenApiContact { Name = "FinanceTracker" }
+        });
+
+        // Cookie auth security definition
+        options.AddSecurityDefinition("cookieAuth", new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.ApiKey,
+            In = ParameterLocation.Cookie,
+            Name = ".AspNetCore.Cookies",
+            Description = "Cookie-based authentication. Log in via `/Account/Login` to obtain a session cookie."
+        });
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "cookieAuth" }
+                },
+                Array.Empty<string>()
+            }
+        });
+
+        // Include XML documentation comments
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        if (File.Exists(xmlPath))
+            options.IncludeXmlComments(xmlPath);
+
+        // Enable [SwaggerOperation] / [SwaggerResponse] annotations
+        options.EnableAnnotations();
+
+        // Wire in example providers
+        options.ExampleFilters();
+    });
+
+    // Register all IExamplesProvider<T> implementations from this assembly
+    builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
     // Authentication
     builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -107,6 +165,16 @@ try
         app.UseExceptionHandler("/Home/Error");
         app.UseHsts();
     }
+
+    // Swagger UI — available in all environments at /swagger
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "FinanceTracker API v1");
+        options.RoutePrefix = "swagger";
+        options.DocumentTitle = "FinanceTracker API Docs";
+        options.DisplayRequestDuration();
+    });
 
     // Log HTTP requests
     app.UseSerilogRequestLogging(options =>

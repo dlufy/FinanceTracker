@@ -3,6 +3,7 @@ namespace FinanceTracker.Web.Controllers;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using FinanceTracker.Web.Models.ViewModels;
 using FinanceTracker.Web.Services.Interfaces;
 
@@ -20,12 +21,14 @@ public class TagsController : Controller
 
     private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
+    /// <summary>Returns the Tags management page.</summary>
     public async Task<IActionResult> Index()
     {
         var tags = await _tagService.GetTagsAsync(GetUserId());
         return View(new TagViewModel { Tags = tags });
     }
 
+    /// <summary>Adds a new tag to the authenticated user's tag list.</summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Add(TagViewModel model)
@@ -42,6 +45,8 @@ public class TagsController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>Deletes a tag from the authenticated user's tag list.</summary>
+    /// <param name="tag">The tag value to delete.</param>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(string tag)
@@ -52,8 +57,13 @@ public class TagsController : Controller
         return RedirectToAction("Index");
     }
 
-    /// <summary>AJAX autocomplete — returns matching tags as JSON array.</summary>
+    /// <summary>Returns tag suggestions matching the given prefix for autocomplete.</summary>
+    /// <param name="q">Search prefix (empty returns all tags).</param>
+    /// <returns>Array of matching tag strings.</returns>
     [HttpGet]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Tag autocomplete suggestions (AJAX)", Tags = new[] { "Tags" })]
+    [SwaggerResponse(200, "Matching tag strings", typeof(string[]))]
     public async Task<IActionResult> Suggestions(string q = "")
     {
         var tags = await _tagService.SearchTagsAsync(GetUserId(), q);

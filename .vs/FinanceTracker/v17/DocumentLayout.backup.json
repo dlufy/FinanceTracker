@@ -54,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
@@ -134,10 +134,6 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ccac2020-73f7-4a95-8a1a-a01925e84057.json",
@@ -145,7 +141,7 @@
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
               "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
               "RelativeToolTip": "FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "ViewState": "AgIAAL0DAAAAAAAAAAAAAM8DAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAL0DAAAAAAAAAAAAAMgDAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-04-04T12:51:21.711Z",
               "EditorCaption": ""

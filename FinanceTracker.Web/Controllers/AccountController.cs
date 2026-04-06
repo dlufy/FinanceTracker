@@ -19,6 +19,8 @@ public class AccountController : Controller
         _logger = logger;
     }
 
+    /// <summary>Renders the login page.</summary>
+    /// <param name="returnUrl">Optional URL to redirect to after successful login.</param>
     [HttpGet]
     public IActionResult Login(string? returnUrl = null)
     {
@@ -28,6 +30,8 @@ public class AccountController : Controller
         return View(new LoginViewModel { ReturnUrl = returnUrl });
     }
 
+    /// <summary>Authenticates the user with username and password.</summary>
+    /// <remarks>On success, sets a persistent authentication cookie valid for 7 days.</remarks>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model)
@@ -66,6 +70,7 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Dashboard");
     }
 
+    /// <summary>Renders the registration page.</summary>
     [HttpGet]
     public IActionResult Register()
     {
@@ -75,6 +80,8 @@ public class AccountController : Controller
         return View(new RegisterViewModel());
     }
 
+    /// <summary>Creates a new user account.</summary>
+    /// <remarks>Usernames must be unique. Passwords are hashed with BCrypt.</remarks>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(RegisterViewModel model)
@@ -103,6 +110,7 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
+    /// <summary>Signs the current user out and clears the session cookie.</summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()

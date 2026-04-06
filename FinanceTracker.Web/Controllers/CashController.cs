@@ -21,6 +21,7 @@ public class CashController : Controller
 
     private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
+    /// <summary>Renders the Cash holdings management page.</summary>
     public async Task<IActionResult> Index()
     {
         var portfolio = await _portfolioRepository.GetPortfolioAsync(GetUserId());
@@ -31,6 +32,7 @@ public class CashController : Controller
         return View(viewModel);
     }
 
+    /// <summary>Adds a new cash/bank holding (savings, FD, current account, etc.).</summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Add(CashEntryViewModel model)
@@ -60,6 +62,8 @@ public class CashController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>Deletes a cash holding by its ID.</summary>
+    /// <param name="id">The unique identifier of the cash holding to delete.</param>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(string id)
@@ -71,6 +75,8 @@ public class CashController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>Renders the edit form pre-populated with an existing cash holding's details.</summary>
+    /// <param name="id">The unique identifier of the cash holding to edit.</param>
     [HttpGet]
     public async Task<IActionResult> Edit(string id)
     {
@@ -89,6 +95,7 @@ public class CashController : Controller
         return View("Index", viewModel);
     }
 
+    /// <summary>Saves changes to an existing cash holding.</summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(CashEntryViewModel model)

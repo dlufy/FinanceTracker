@@ -146,3 +146,6 @@ D:\workshop\FinanceTracker\FinanceTracker.Tests\bin\Debug\net9.0\Microsoft.Exten
 D:\workshop\FinanceTracker\FinanceTracker.Tests\bin\Debug\net9.0\Npgsql.dll
 D:\workshop\FinanceTracker\FinanceTracker.Tests\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\workshop\FinanceTracker\FinanceTracker.Tests\bin\Debug\net9.0\Data\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json
+D:\FinanceTracker\FinanceTracker.Tests\obj\Debug\net9.0\FinanceTracker.Tests.dll
+D:\FinanceTracker\FinanceTracker.Tests\obj\Debug\net9.0\refint\FinanceTracker.Tests.dll
+D:\FinanceTracker\FinanceTracker.Tests\obj\Debug\net9.0\FinanceTracker.Tests.pdb

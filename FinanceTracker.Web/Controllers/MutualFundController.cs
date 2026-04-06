@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using FinanceTracker.Web.Models;
 using FinanceTracker.Web.Models.ViewModels;
 using FinanceTracker.Web.Services.Interfaces;
@@ -186,8 +187,14 @@ public class MutualFundController : Controller
     /// <summary>
     /// AJAX endpoint: apply user-confirmed scheme code mappings to the server-side preview JSON and cache them.
     /// </summary>
+    /// <param name="previewFileId">The server-side preview file ID returned during the Preview step.</param>
+    /// <param name="mappingsJson">JSON array of <c>[{holdingId, schemeCode}]</c> mapping objects.</param>
+    /// <returns>JSON object with <c>success: true</c>, or <c>success: false, error: "..."</c> on failure.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Apply scheme code mappings to MF preview (AJAX)", Tags = new[] { "Mutual Funds" })]
+    [SwaggerResponse(200, "Success or failure result", typeof(object))]
     public async Task<IActionResult> UpdateSchemes([FromForm] string previewFileId, [FromForm] string mappingsJson)
     {
         try
@@ -230,8 +237,13 @@ public class MutualFundController : Controller
         }
     }
 
-    /// <summary>Live scheme search endpoint for autocomplete in the mapping UI.</summary>
+    /// <summary>Live scheme name search for autocomplete in the mapping UI.</summary>
+    /// <param name="q">Search query — minimum 2 characters. Searches MFAPI by scheme name.</param>
+    /// <returns>Array of <c>{schemeCode, schemeName}</c> objects (up to 10 results).</returns>
     [HttpGet]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Search mutual fund schemes (AJAX)", Tags = new[] { "Mutual Funds" })]
+    [SwaggerResponse(200, "Matching schemes", typeof(object[]))]
     public async Task<IActionResult> SearchScheme(string q)
     {
         if (string.IsNullOrWhiteSpace(q) || q.Length < 2)

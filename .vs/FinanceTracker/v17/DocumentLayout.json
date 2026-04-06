@@ -1,49 +1,49 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\workshop\\FinanceTracker\\",
+  "WorkspaceRootPath": "D:\\FinanceTracker\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\services\\fileparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\services\\fileparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\services\\fileparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\migrations\\financetrackerdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\migrations\\financetrackerdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\migrations\\financetrackerdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\migrations\\20260404135507_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\migrations\\20260404135507_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\migrations\\20260404135507_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\database\\designtimedbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\database\\designtimedbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\database\\designtimedbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\services\\symbolmappingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\services\\symbolmappingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\services\\symbolmappingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\services\\marketdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\services\\marketdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\services\\marketdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\workshop\\financetracker\\financetracker.web\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|d:\\financetracker\\financetracker.web\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22F1F034-6E19-420C-8B12-E4EFFA6733FF}|FinanceTracker.Web\\FinanceTracker.Web.csproj|solutionrelative:financetracker.web\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -54,73 +54,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 10,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "RelativeDocumentMoniker": "FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "RelativeToolTip": "FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-05T14:07:27.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FileParserService.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Services\\FileParserService.cs",
-              "RelativeDocumentMoniker": "FinanceTracker.Web\\Services\\FileParserService.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Services\\FileParserService.cs",
-              "RelativeToolTip": "FinanceTracker.Web\\Services\\FileParserService.cs",
-              "ViewState": "AgIAAA4BAAAAAAAAAAAewB4BAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T15:04:15.879Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FinanceTrackerDbContextModelSnapshot.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
-              "RelativeToolTip": "FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T15:03:26.841Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "20260404135507_Initial.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
-              "RelativeDocumentMoniker": "FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
-              "RelativeToolTip": "FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T15:03:11.373Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DesignTimeDbContextFactory.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
-              "RelativeDocumentMoniker": "FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
-              "RelativeToolTip": "FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T13:52:32.359Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
@@ -134,12 +69,80 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "RelativeDocumentMoniker": "FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "RelativeToolTip": "FinanceTracker.Web\\Data\\tags_ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-05T14:07:27.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FileParserService.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Services\\FileParserService.cs",
+              "RelativeDocumentMoniker": "FinanceTracker.Web\\Services\\FileParserService.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Services\\FileParserService.cs",
+              "RelativeToolTip": "FinanceTracker.Web\\Services\\FileParserService.cs",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAewB4BAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T15:04:15.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FinanceTrackerDbContextModelSnapshot.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
+              "RelativeToolTip": "FinanceTracker.Web\\Migrations\\FinanceTrackerDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T15:03:26.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20260404135507_Initial.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
+              "RelativeDocumentMoniker": "FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
+              "RelativeToolTip": "FinanceTracker.Web\\Migrations\\20260404135507_Initial.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T15:03:11.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DesignTimeDbContextFactory.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
+              "RelativeDocumentMoniker": "FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
+              "RelativeToolTip": "FinanceTracker.Web\\Database\\DesignTimeDbContextFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T13:52:32.359Z"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
               "RelativeToolTip": "FinanceTracker.Web\\Data\\portfolios\\ccac2020-73f7-4a95-8a1a-a01925e84057.json",
               "ViewState": "AgIAAL0DAAAAAAAAAAAAAMgDAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -150,70 +153,61 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "SymbolMappingService.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Services\\SymbolMappingService.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Services\\SymbolMappingService.cs",
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Services\\SymbolMappingService.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Services\\SymbolMappingService.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Services\\SymbolMappingService.cs",
               "RelativeToolTip": "FinanceTracker.Web\\Services\\SymbolMappingService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T15:01:07.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-04T15:01:07.661Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Views\\Dashboard\\Index.cshtml",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Views\\Dashboard\\Index.cshtml",
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Views\\Dashboard\\Index.cshtml",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Views\\Dashboard\\Index.cshtml",
               "RelativeToolTip": "FinanceTracker.Web\\Views\\Dashboard\\Index.cshtml",
               "ViewState": "AgIAAPsAAAAAAAAAAAAAABQBAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-04T13:48:40.132Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-04T13:48:40.132Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "DashboardController.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Controllers\\DashboardController.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Controllers\\DashboardController.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Controllers\\DashboardController.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Controllers\\DashboardController.cs",
               "RelativeToolTip": "FinanceTracker.Web\\Controllers\\DashboardController.cs",
               "ViewState": "AgIAAE0AAAAAAAAAAAAewF4AAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T12:52:32.225Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-04T12:52:32.225Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "MarketDataService.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Services\\MarketDataService.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Services\\MarketDataService.cs",
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Services\\MarketDataService.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Services\\MarketDataService.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Services\\MarketDataService.cs",
               "RelativeToolTip": "FinanceTracker.Web\\Services\\MarketDataService.cs",
               "ViewState": "AgIAAEUAAAAAAAAAAAAgwFAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T12:50:22.356Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+              "WhenOpened": "2026-04-04T12:50:22.356Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Program.cs",
+              "DocumentMoniker": "D:\\FinanceTracker\\FinanceTracker.Web\\Program.cs",
               "RelativeDocumentMoniker": "FinanceTracker.Web\\Program.cs",
-              "ToolTip": "D:\\workshop\\FinanceTracker\\FinanceTracker.Web\\Program.cs",
+              "ToolTip": "D:\\FinanceTracker\\FinanceTracker.Web\\Program.cs",
               "RelativeToolTip": "FinanceTracker.Web\\Program.cs",
               "ViewState": "AgIAAGoAAAAAAAAAAAAAAJgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T06:48:48.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-04T06:48:48.469Z"
             }
           ]
         }

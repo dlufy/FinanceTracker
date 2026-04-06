@@ -57,12 +57,18 @@ public class EquityController : Controller
         };
     }
 
+    /// <summary>Renders the Equity holdings management page.</summary>
     public async Task<IActionResult> Index()
     {
         var portfolio = await _portfolioRepository.GetPortfolioAsync(GetUserId());
         return View(BuildViewModel(portfolio));
     }
 
+    /// <summary>Parses an uploaded CSV/XLSX equity holdings file and renders a preview before committing.</summary>
+    /// <remarks>
+    /// Supported formats: Zerodha holdings CSV, Groww holdings CSV, or a generic format with columns:
+    /// <c>Symbol, ISIN, Exchange, Quantity, AverageBuyPrice</c>.
+    /// </remarks>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Preview(EquityUploadViewModel model)
@@ -135,6 +141,8 @@ public class EquityController : Controller
         }
     }
 
+    /// <summary>Downloads the current equity preview data as a CSV file.</summary>
+    /// <param name="id">The preview file ID from the upload step.</param>
     [HttpGet]
     public async Task<IActionResult> DownloadPreview(string id)
     {
@@ -172,6 +180,10 @@ public class EquityController : Controller
         return File(bytes, "text/csv", $"preview_equity_{accountTag}.csv");
     }
 
+    /// <summary>
+    /// Confirms the previewed equity upload: fetches live prices, replaces all existing holdings for
+    /// the account tag, and saves to the portfolio.
+    /// </summary>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmUpload()
