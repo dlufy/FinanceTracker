@@ -1,0 +1,69 @@
+@model FinanceTracker.Web.Models.ViewModels.TagViewModel
+@{
+    ViewData["Title"] = "Manage Tags";
+}
+
+<h2 class="mb-4">🏷️ Manage Tags</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">@TempData["SuccessMessage"]<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+}
+
+<div class="row">
+    <!-- Add Tag -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow">
+            <div class="card-header"><strong>➕ Add Tag</strong></div>
+            <div class="card-body">
+                <form asp-action="Add" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label class="form-label">Tag Name</label>
+                        <input type="text" asp-for="NewTag" class="form-control"
+                               placeholder="e.g. work, personal, reimbursable" />
+                        <span asp-validation-for="NewTag" class="text-danger small"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Tag</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tag List -->
+    <div class="col-md-8 mb-4">
+        <div class="card shadow">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <strong>All Tags (@Model.Tags.Count)</strong>
+            </div>
+            <div class="card-body">
+                @if (Model.Tags.Any())
+                {
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <div class="d-flex align-items-center bg-light border rounded px-2 py-1">
+                                <span class="badge bg-info text-dark me-2">@tag</span>
+                                <form asp-action="Delete" method="post" class="d-inline m-0 p-0"
+                                      onsubmit="return confirm('Remove tag \'@tag\'?')">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="tag" value="@tag" />
+                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0" title="Remove">✕</button>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No tags yet. Add your first tag above.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="text-muted small">
+    Tags are auto-registered when you add or import expenses. Use this page to remove tags you no longer need.
+    <a asp-controller="Expense" asp-action="Index">← Back to Expenses</a>
+</p>

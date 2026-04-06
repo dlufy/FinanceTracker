@@ -1,0 +1,462 @@
+@model FinanceTracker.Web.Models.ViewModels.MutualFundUploadViewModel
+@{
+    ViewData["Title"] = "Mutual Fund Holdings";
+}
+
+<h2 class="mb-4">📋 Mutual Fund Holdings</h2>
+
+<!-- Upload Section -->
+<div class="card shadow mb-4">
+    <div class="card-header"><strong>Upload Mutual Fund Holdings (CSV or XLSX)</strong></div>
+    <div class="card-body">
+        <form asp-action="Preview" method="post" enctype="multipart/form-data">
+            <div class="row align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label">Account / Broker <span class="text-danger">*</span></label>
+                    <input type="text" name="AccountTag" value="@Model.AccountTag" class="form-control"
+                           placeholder="e.g., Groww, Kuvera" required
+                           list="existingMFAccounts" />
+                    <datalist id="existingMFAccounts">
+                        @foreach (var acct in Model.ExistingAccounts)
+                        {
+                            <option value="@acct" />
+                        }
+                    </datalist>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Select your holdings file</label>
+                    <input type="file" name="CsvFile" class="form-control" accept=".csv,.xlsx,.xls" />
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100 mt-2">📋 Upload &amp; Preview</button>
+                </div>
+            </div>
+            <small class="text-muted mt-1 d-block">
+                Re-uploading for the same account will <strong>replace</strong> all existing holdings for that account.
+            </small>
+        </form>
+
+        @if (Model.UploadMessage != null)
+        {
+            <div class="alert @(Model.ShowPreview ? "alert-info" : "alert-warning") mt-3">@Model.UploadMessage</div>
+        }
+
+        <!-- Format Info Accordion -->
+        <div class="accordion mt-3" id="formatInfoAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#formatInfo">
+                        ℹ️ Expected File Formats (click to expand)
+                    </button>
+                </h2>
+                <div id="formatInfo" class="accordion-collapse collapse" data-bs-parent="#formatInfoAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><strong>CSV Format</strong></h6>
+                                <table class="table table-sm table-bordered">
+                                    <thead class="table-light"><tr><th>Column</th><th>Example</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Scheme Code</td><td>119551</td></tr>
+                                        <tr><td>Scheme Name</td><td>Axis Bluechip Fund</td></tr>
+                                        <tr><td>Folio Number</td><td>12345</td></tr>
+                                        <tr><td>Units</td><td>100.50</td></tr>
+                                        <tr><td>Average NAV</td><td>45.00</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><strong>XLSX Format (Groww / Broker Export)</strong></h6>
+                                <table class="table table-sm table-bordered">
+                                    <thead class="table-light"><tr><th>Column</th><th>Example</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Scheme Name <span class="text-danger">*</span></td><td>Parag Parikh Flexi Cap Fund</td></tr>
+                                        <tr><td>Scheme Code <span class="text-muted">(optional)</span></td><td>122639</td></tr>
+                                        <tr><td>AMC</td><td>PPFAS Mutual Fund</td></tr>
+                                        <tr><td>Category</td><td>Equity</td></tr>
+                                        <tr><td>Folio No.</td><td>10629941</td></tr>
+                                        <tr><td>Units <span class="text-danger">*</span></td><td>2534.88</td></tr>
+                                        <tr><td>Invested Value <span class="text-danger">*</span></td><td>184990.88</td></tr>
+                                        <tr><td>Current Value</td><td>219306.67</td></tr>
+                                    </tbody>
+                                </table>
+                                <small class="text-muted"><span class="text-danger">*</span> Required. If Scheme Code is absent, we auto-resolve by name using MFAPI.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Section -->
+@if (Model.ShowPreview && Model.PreviewHoldings.Any())
+{
+    <div class="card shadow mb-4 border-info">
+        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+            <strong>📋 Preview — @Model.PreviewHoldings.Count holdings for "@Model.PreviewAccountTag"</strong>
+            <div>
+                @if (!string.IsNullOrEmpty(Model.PreviewFileId))
+                {
+                    <a asp-action="DownloadPreview" asp-route-id="@Model.PreviewFileId"
+                       class="btn btn-outline-light btn-sm">📥 Download Preview CSV</a>
+                }
+                <form asp-action="ConfirmUpload" method="post" class="d-inline" id="confirmFormMf">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-success btn-sm ms-2" id="confirmBtnMf"
+                            @(Model.HasUnresolvedFunds ? "disabled" : "")>
+                        ✅ Confirm &amp; Save
+                    </button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-light btn-sm ms-2">✕ Cancel</a>
+            </div>
+        </div>
+
+        @* Scheme Mapping Section *@
+        @if (Model.HasUnresolvedFunds)
+        {
+            <div class="card-body border-bottom bg-warning-subtle" id="schemeMappingSection">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="fs-5 me-2">⚠️</span>
+                    <div>
+                        <strong>Scheme Code Resolution Required</strong>
+                        <div class="text-muted small">@Model.UnresolvedFunds.Count scheme(s) need a code to fetch live NAV.
+                            Select the correct scheme from suggestions or type a code manually, then click <em>Apply Mappings</em>.</div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered bg-white mb-2" id="schemeMappingTable">
+                        <thead class="table-warning">
+                            <tr>
+                                <th>Scheme Name</th>
+                                <th style="min-width:300px">Scheme Code <small class="text-muted">(select or type)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.UnresolvedFunds)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@item.SchemeName</strong>
+                                        <input type="hidden" class="mf-holding-id" value="@item.HoldingId" />
+                                    </td>
+                                    <td>
+                                        @if (item.Candidates.Any())
+                                        {
+                                            <select class="form-select form-select-sm scheme-select" data-holding="@item.HoldingId">
+                                                <option value="">— choose —</option>
+                                                @foreach (var c in item.Candidates)
+                                                {
+                                                    <option value="@c.SchemeCode">@c.SchemeCode — @c.SchemeName</option>
+                                                }
+                                                <option value="__manual__">✏️ Type manually…</option>
+                                            </select>
+                                        }
+                                        <input type="text" class="form-control form-control-sm scheme-manual mt-1 @(item.Candidates.Any() ? "d-none" : "")"
+                                               placeholder="e.g. 119551"
+                                               data-holding="@item.HoldingId" />
+                                        <small class="text-muted">
+                                            <a href="https://api.mfapi.in/mf/search?q=@Uri.EscapeDataString(item.SchemeName)" target="_blank">🔍 Search MFAPI</a>
+                                        </small>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button class="btn btn-warning btn-sm" id="applySchemeMappingsBtn" onclick="applySchemeMappings()">
+                        🔗 Apply Mappings &amp; Enable Confirm
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm ms-auto" onclick="skipSchemeMapping()">Skip (no live NAV)</button>
+                </div>
+
+                <div id="schemeMappingStatus" class="mt-2 d-none"></div>
+            </div>
+
+            <script>
+                document.querySelectorAll('.scheme-select').forEach(sel => {
+                    sel.addEventListener('change', function () {
+                        const holdingId = this.dataset.holding;
+                        const manual = document.querySelector(`.scheme-manual[data-holding="${holdingId}"]`);
+                        if (this.value === '__manual__') {
+                            manual.classList.remove('d-none');
+                            manual.focus();
+                        } else {
+                            manual.classList.add('d-none');
+                        }
+                    });
+                    // pre-select first real option
+                    if (sel.options.length > 1) sel.value = sel.options[1].value;
+                });
+
+                async function applySchemeMappings() {
+                    const btn = document.getElementById('applySchemeMappingsBtn');
+                    const statusEl = document.getElementById('schemeMappingStatus');
+                    btn.disabled = true;
+                    btn.textContent = '⏳ Applying…';
+
+                    const mappings = [];
+                    document.querySelectorAll('#schemeMappingTable tbody tr').forEach(row => {
+                        const holdingId = row.querySelector('.mf-holding-id').value;
+                        const sel = row.querySelector('.scheme-select');
+                        const manual = row.querySelector('.scheme-manual');
+
+                        let schemeCode = '';
+                        if (sel && sel.value && sel.value !== '__manual__' && sel.value !== '') {
+                            schemeCode = sel.value;
+                        } else if (manual && !manual.classList.contains('d-none')) {
+                            schemeCode = manual.value.trim();
+                        }
+                        if (schemeCode) mappings.push({ holdingId, schemeCode });
+                    });
+
+                    const token = document.querySelector('#confirmFormMf input[name="__RequestVerificationToken"]').value;
+
+                    const formData = new FormData();
+                    formData.append('previewFileId', '@Model.PreviewFileId');
+                    formData.append('mappingsJson', JSON.stringify(mappings));
+                    formData.append('__RequestVerificationToken', token);
+
+                    try {
+                        const resp = await fetch('/MutualFund/UpdateSchemes', { method: 'POST', body: formData });
+                        const result = await resp.json();
+                        if (result.success) {
+                            statusEl.className = 'mt-2 alert alert-success py-1';
+                            statusEl.textContent = `✅ Mappings applied for ${mappings.length} scheme(s). Click Confirm & Save to proceed.`;
+                            document.getElementById('schemeMappingSection').classList.add('border-success');
+                            document.getElementById('confirmBtnMf').disabled = false;
+                        } else {
+                            throw new Error(result.error || 'Unknown error');
+                        }
+                    } catch (e) {
+                        statusEl.className = 'mt-2 alert alert-danger py-1';
+                        statusEl.textContent = `❌ Failed: ${e.message}`;
+                        btn.disabled = false;
+                        btn.textContent = '🔗 Apply Mappings & Enable Confirm';
+                    }
+                }
+
+                function skipSchemeMapping() {
+                    document.getElementById('schemeMappingSection').style.display = 'none';
+                    document.getElementById('confirmBtnMf').disabled = false;
+                }
+            </script>
+        }
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Scheme Name</th>
+                            <th>AMC</th>
+                            <th>Folio</th>
+                            <th class="text-end">Units</th>
+                            <th class="text-end">Avg NAV</th>
+                            <th class="text-end">Current NAV</th>
+                            <th class="text-end">Invested</th>
+                            <th class="text-end">Current Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.PreviewHoldings.Count; i++)
+                        {
+                            var h = Model.PreviewHoldings[i];
+                            var isUnresolved = Model.UnresolvedFunds.Any(u => u.HoldingId == h.Id);
+                            <tr class="@(isUnresolved ? "table-warning" : "")">
+                                <td>@(i + 1)</td>
+                                <td>
+                                    <strong>@h.SchemeName</strong>
+                                    @if (isUnresolved)
+                                    {
+                                        <br/><small class="text-warning fw-bold">⚠️ scheme code unresolved</small>
+                                    }
+                                    else if (!string.IsNullOrEmpty(h.SchemeCode))
+                                    {
+                                        <br/><small class="text-muted">Code: @h.SchemeCode</small>
+                                    }
+                                    @if (!string.IsNullOrEmpty(h.Category))
+                                    {
+                                        <br/><small class="text-muted">@h.Category</small>
+                                    }
+                                </td>
+                                <td><small>@h.Amc</small></td>
+                                <td>@h.FolioNumber</td>
+                                <td class="text-end">@h.Units.ToString("N4")</td>
+                                <td class="text-end">₹ @h.AverageNav.ToString("N4")</td>
+                                <td class="text-end">₹ @h.CurrentNav.ToString("N4")</td>
+                                <td class="text-end">₹ @h.InvestedValue.ToString("N2")</td>
+                                <td class="text-end">₹ @h.CurrentValue.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <td colspan="7" class="text-end"><strong>Total</strong></td>
+                            <td class="text-end"><strong>₹ @Model.PreviewHoldings.Sum(h => h.InvestedValue).ToString("N2")</strong></td>
+                            <td class="text-end"><strong>₹ @Model.PreviewHoldings.Sum(h => h.CurrentValue).ToString("N2")</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Holdings Table -->
+<div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Current Holdings (@Model.Holdings.Count)</strong>
+        @if (Model.Holdings.Any())
+        {
+            <form asp-action="DeleteAll" method="post" class="d-inline"
+                  onsubmit="return confirm('Delete ALL mutual fund holdings from ALL accounts?')">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-sm btn-outline-danger">Clear All</button>
+            </form>
+        }
+    </div>
+    <div class="card-body p-0">
+        @if (Model.Holdings.Any())
+        {
+            @if (Model.ExistingAccounts.Any())
+            {
+                <div class="p-2 bg-light border-bottom">
+                    <small class="text-muted me-2">Accounts:</small>
+                    @foreach (var acct in Model.ExistingAccounts)
+                    {
+                        var acctCount = Model.Holdings.Count(h => h.AccountTag.Equals(acct, StringComparison.OrdinalIgnoreCase));
+                        <span class="badge bg-secondary me-1">@acct (@acctCount)</span>
+                        <form asp-action="DeleteAccount" method="post" class="d-inline"
+                              onsubmit="return confirm('Delete all holdings from @acct?')">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="accountTag" value="@acct" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm py-0 px-1 me-2" title="Delete all @acct holdings">✕</button>
+                        </form>
+                    }
+                </div>
+            }
+
+            <!-- Pie Chart by Category -->
+            <div class="row g-0">
+                <div class="col-md-4 p-3 border-end">
+                    <h6 class="text-center text-muted">Allocation by Category</h6>
+                    <canvas id="mfPieChart" height="200"></canvas>
+                </div>
+                <div class="col-md-8">
+                    <div class="p-2 border-bottom">
+                        <input type="text" id="mfSearch" class="form-control form-control-sm" placeholder="🔍 Search holdings..." />
+                    </div>
+                    <div class="table-responsive">
+                        <table id="mfTable" class="table table-striped table-hover mb-0 sortable-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="sortable" data-col="0">Account ↕</th>
+                                    <th class="sortable" data-col="1">Scheme ↕</th>
+                                    <th class="sortable" data-col="2">AMC ↕</th>
+                                    <th class="sortable" data-col="3">Folio ↕</th>
+                                    <th class="text-end sortable" data-col="4">Units ↕</th>
+                                    <th class="text-end sortable" data-col="5">Avg NAV ↕</th>
+                                    <th class="text-end sortable" data-col="6">Curr NAV ↕</th>
+                                    <th class="text-end sortable" data-col="7">Invested ↕</th>
+                                    <th class="text-end sortable" data-col="8">Value ↕</th>
+                                    <th class="text-end sortable" data-col="9">P&amp;L ↕</th>
+                                    <th class="text-end sortable" data-col="10">P&amp;L% ↕</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var h in Model.Holdings.OrderBy(h => h.AccountTag).ThenBy(h => h.SchemeName))
+                                {
+                                    <tr>
+                                        <td><span class="badge bg-secondary">@h.AccountTag</span></td>
+                                        <td>
+                                            <strong>@h.SchemeName</strong>
+                                            @if (!string.IsNullOrEmpty(h.Category))
+                                            {
+                                                <br/><small class="text-muted">@h.Category</small>
+                                            }
+                                            @if (!string.IsNullOrEmpty(h.SchemeCode))
+                                            {
+                                                <br/><small class="text-muted">Code: @h.SchemeCode</small>
+                                            }
+                                        </td>
+                                        <td><small>@h.Amc</small></td>
+                                        <td>@h.FolioNumber</td>
+                                        <td class="text-end">@h.Units.ToString("N4")</td>
+                                        <td class="text-end">₹ @h.AverageNav.ToString("N4")</td>
+                                        <td class="text-end">₹ @h.CurrentNav.ToString("N4")</td>
+                                        <td class="text-end">₹ @h.InvestedValue.ToString("N2")</td>
+                                        <td class="text-end">₹ @h.CurrentValue.ToString("N2")</td>
+                                        <td class="text-end @(h.ProfitLoss >= 0 ? "text-success" : "text-danger")">
+                                            ₹ @h.ProfitLoss.ToString("N2")
+                                        </td>
+                                        <td class="text-end @(h.ProfitLossPercent >= 0 ? "text-success" : "text-danger")">
+                                            @h.ProfitLossPercent.ToString("N2")%
+                                        </td>
+                                        <td>
+                                            <form asp-action="Delete" method="post" class="d-inline"
+                                                  onsubmit="return confirm('Remove this holding?')">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@h.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">✕</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot class="table-light">
+                                <tr>
+                                    <td colspan="7" class="text-end"><strong>Total</strong></td>
+                                    <td class="text-end"><strong>₹ @Model.Holdings.Sum(h => h.InvestedValue).ToString("N2")</strong></td>
+                                    <td class="text-end"><strong>₹ @Model.Holdings.Sum(h => h.CurrentValue).ToString("N2")</strong></td>
+                                    <td class="text-end @(Model.Holdings.Sum(h => h.ProfitLoss) >= 0 ? "text-success" : "text-danger")">
+                                        <strong>₹ @Model.Holdings.Sum(h => h.ProfitLoss).ToString("N2")</strong>
+                                    </td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center text-muted p-4">
+                <p>No mutual fund holdings yet. Upload a CSV or XLSX file to get started.</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        setupSortFilter('mfTable', 'mfSearch');
+
+        @if (Model.Holdings.Any())
+        {
+            var categoryGroups = Model.Holdings
+                .GroupBy(h => string.IsNullOrEmpty(h.Category) ? "Uncategorised" : h.Category)
+                .Select(g => new { Label = g.Key, Value = g.Sum(h => h.CurrentValue) })
+                .ToList();
+            <text>
+            new Chart(document.getElementById('mfPieChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(categoryGroups.Select(g => g.Label))),
+                    datasets: [{ data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(categoryGroups.Select(g => g.Value))),
+                        backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545','#6c757d','#0dcaf0','#fd7e14','#6f42c1'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+            </text>
+        }
+    </script>
+}

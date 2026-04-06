@@ -1,0 +1,9 @@
+2026-04-06 03:32:47.132 +05:30 [DBG] Microsoft.Extensions.Http.DefaultHttpClientFactory: Starting HttpMessageHandler cleanup cycle with 1 items
+2026-04-06 03:32:48.169 +05:30 [DBG] Microsoft.Extensions.Http.DefaultHttpClientFactory: Ending HttpMessageHandler cleanup cycle after 0.0071ms - processed: 0 items - remaining: 1 items
+2026-04-06 03:33:20.777 +05:30 [DBG] Microsoft.Extensions.Http.DefaultHttpClientFactory: Starting HttpMessageHandler cleanup cycle with 1 items
+2026-04-06 03:33:20.783 +05:30 [DBG] Microsoft.Extensions.Http.DefaultHttpClientFactory: Ending HttpMessageHandler cleanup cycle after 0.0045ms - processed: 0 items - remaining: 1 items
+2026-04-06 07:50:21.828 +05:30 [DBG] Microsoft.Extensions.Http.DefaultHttpClientFactory: Starting HttpMessageHandler cleanup cycle with 1 items
+2026-04-06 07:50:26.632 +05:30 [DBG] Microsoft.Extensions.Http.DefaultHttpClientFactory: Ending HttpMessageHandler cleanup cycle after 0.0915ms - processed: 1 items - remaining: 0 items
+2026-04-06 07:55:45.880 +05:30 [INF] Microsoft.Hosting.Lifetime: Application is shutting down...
+2026-04-06 07:55:45.882 +05:30 [DBG] Microsoft.Extensions.Hosting.Internal.Host: Hosting stopping
+2026-04-06 07:55:45.909 +05:30 [DBG] Microsoft.Extensions.Hosting.Internal.Host: Hosting stopped

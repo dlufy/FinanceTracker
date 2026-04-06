@@ -1,0 +1,145 @@
+@model FinanceTracker.Web.Models.ViewModels.CashEntryViewModel
+@{
+    ViewData["Title"] = "Cash Holdings";
+}
+
+<h2 class="mb-4">🏦 Cash Holdings</h2>
+
+<!-- Add/Edit Form -->
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <strong>@(Model.Id != null ? "Edit Cash Entry" : "Add Cash Entry")</strong>
+    </div>
+    <div class="card-body">
+        <form asp-action="@(Model.Id != null ? "Update" : "Add")" method="post">
+            @if (Model.Id != null)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="BankName" class="form-label"></label>
+                    <input asp-for="BankName" class="form-control" placeholder="e.g., SBI, HDFC, ICICI" />
+                    <span asp-validation-for="BankName" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="AccountType" class="form-label"></label>
+                    <select asp-for="AccountType" class="form-select">
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                        <option value="Fixed Deposit">Fixed Deposit</option>
+                        <option value="Recurring Deposit">Recurring Deposit</option>
+                    </select>
+                    <span asp-validation-for="AccountType" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Balance" class="form-label"></label>
+                    <input asp-for="Balance" class="form-control" type="number" step="0.01" min="0" />
+                    <span asp-validation-for="Balance" class="text-danger"></span>
+                </div>
+                <div class="col-md-2 mb-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        @(Model.Id != null ? "Update" : "Add")
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Cash Holdings Table -->
+<div class="card shadow">
+    <div class="card-header">
+        <strong>Cash Accounts (@Model.CashHoldings.Count)</strong>
+    </div>
+    <div class="card-body p-0">
+        @if (Model.CashHoldings.Any())
+        {
+            <!-- Pie Chart by Bank + Sort/Filter -->
+            <div class="row g-0">
+                <div class="col-md-4 p-3 border-end">
+                    <h6 class="text-center text-muted">Allocation by Bank</h6>
+                    <canvas id="cashPieChart" height="200"></canvas>
+                </div>
+                <div class="col-md-8">
+                    <div class="p-2 border-bottom">
+                        <input type="text" id="cashSearch" class="form-control form-control-sm" placeholder="🔍 Search accounts..." />
+                    </div>
+                    <div class="table-responsive">
+                        <table id="cashTable" class="table table-striped table-hover mb-0 sortable-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="sortable" data-col="0">Bank ↕</th>
+                                    <th class="sortable" data-col="1">Account Type ↕</th>
+                                    <th class="text-end sortable" data-col="2">Balance ↕</th>
+                                    <th class="sortable" data-col="3">Last Updated ↕</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var h in Model.CashHoldings)
+                                {
+                                    <tr>
+                                        <td><strong>@h.BankName</strong></td>
+                                        <td>@h.AccountType</td>
+                                        <td class="text-end">₹ @h.Balance.ToString("N2")</td>
+                                        <td>@h.LastUpdated.ToString("dd MMM yyyy")</td>
+                                        <td class="text-center">
+                                            <a asp-action="Edit" asp-route-id="@h.Id" class="btn btn-sm btn-outline-primary">✏️</a>
+                                            <form asp-action="Delete" method="post" class="d-inline"
+                                                  onsubmit="return confirm('Remove this cash entry?')">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@h.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">✕</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot class="table-light">
+                                <tr>
+                                    <td colspan="2" class="text-end"><strong>Total</strong></td>
+                                    <td class="text-end"><strong>₹ @Model.CashHoldings.Sum(h => h.Balance).ToString("N2")</strong></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center text-muted p-4">
+                <p>No cash holdings yet. Use the form above to add your bank balances.</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        setupSortFilter('cashTable', 'cashSearch');
+
+        @if (Model.CashHoldings.Any())
+        {
+            var bankGroups = Model.CashHoldings
+                .GroupBy(h => h.BankName)
+                .Select(g => new { Label = g.Key, Value = g.Sum(h => h.Balance) })
+                .ToList();
+            <text>
+            new Chart(document.getElementById('cashPieChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(bankGroups.Select(g => g.Label))),
+                    datasets: [{ data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(bankGroups.Select(g => g.Value))),
+                        backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545','#6c757d','#0dcaf0'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+            </text>
+        }
+    </script>
+}
