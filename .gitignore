@@ -39,3 +39,7 @@ TestResults/
 coverage/
 *.trx
 *.coveragexml
+# bin files
+FinanceTracker.Web/bin/*
+FinanceTracker.Web/obj/*
+FinanceTracker.Tests/bin/*
